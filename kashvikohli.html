@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+SchoolFest Pro - School Event Discovery & Booking
+</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#f4f7fc;
+color:#333;
+transition:.3s;
+}
+
+header{
+
+background:
+linear-gradient(
+135deg,
+#4f46e5,
+#7c3aed
+);
+
+padding:20px 50px;
+
+display:flex;
+
+justify-content:
+space-between;
+
+align-items:center;
+
+color:white;
+
+position:sticky;
+top:0;
+z-index:1000;
+
+}
+
+.logo{
+
+font-size:28px;
+font-weight:bold;
+
+}
+
+nav{
+
+display:flex;
+align-items:center;
+gap:15px;
+
+}
+
+nav a{
+
+text-decoration:none;
+color:white;
+font-weight:500;
+
+}
+
+.dark-btn{
+
+background:white;
+color:#4f46e5;
+
+border:none;
+
+padding:10px 15px;
+
+border-radius:10px;
+
+cursor:pointer;
+
+}
+
+.hero{
+
+padding:80px 20px;
+
+text-align:center;
+
+background:
+linear-gradient(
+135deg,
+#eef2ff,
+#ffffff
+);
+
+}
+
+.hero h1{
+
+font-size:50px;
+margin-bottom:15px;
+
+}
+
+.hero p{
+
+font-size:18px;
+
+max-width:700px;
+
+margin:auto;
+
+color:#666;
+
+margin-bottom:30px;
+
+}
+
+.login-box{
+
+display:flex;
+
+justify-content:center;
+
+gap:10px;
+
+flex-wrap:wrap;
+
+margin-top:25px;
+
+}
+
+.login-box input{
+
+padding:12px;
+
+width:260px;
+
+border-radius:10px;
+
+border:1px solid #ddd;
+
+}
+
+.btn{
+
+background:#4f46e5;
+
+color:white;
+
+border:none;
+
+padding:12px 18px;
+
+border-radius:10px;
+
+cursor:pointer;
+
+}
+
+.features{
+
+margin-top:40px;
+
+display:flex;
+
+justify-content:center;
+
+gap:20px;
+
+flex-wrap:wrap;
+
+}
+
+.feature{
+
+background:white;
+
+padding:15px 20px;
+
+border-radius:15px;
+
+box-shadow:
+0 5px 15px
+rgba(0,0,0,.08);
+
+font-weight:600;
+
+}
+
+.why{
+
+padding:60px 20px;
+
+text-align:center;
+
+background:white;
+
+}
+
+.why h2{
+
+margin-bottom:20px;
+
+font-size:34px;
+
+}
+
+.why p{
+
+max-width:700px;
+
+margin:auto;
+
+line-height:2;
+
+}
+
+.search-section{
+
+padding:40px 20px;
+
+}
+
+.search-box{
+
+max-width:650px;
+
+margin:auto;
+
+display:flex;
+
+gap:10px;
+
+}
+
+.search-box input{
+
+flex:1;
+
+padding:12px;
+
+border-radius:10px;
+
+border:1px solid #ddd;
+
+}
+
+.search-box button{
+
+background:#4f46e5;
+
+color:white;
+
+border:none;
+
+padding:12px 20px;
+
+border-radius:10px;
+
+cursor:pointer;
+
+}
+
+.events{
+
+padding:40px;
+
+display:grid;
+
+grid-template-columns:
+repeat(
+auto-fit,
+minmax(280px,1fr)
+);
+
+gap:25px;
+
+}
+
+.card{
+
+background:white;
+
+border-radius:18px;
+
+overflow:hidden;
+
+box-shadow:
+0 5px 15px
+rgba(0,0,0,.1);
+
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:
+translateY(-8px);
+
+}
+
+.card img{
+
+width:100%;
+height:200px;
+object-fit:cover;
+
+}
+
+.card-content{
+
+padding:20px;
+
+}
+
+.tag{
+
+display:inline-block;
+
+padding:6px 12px;
+
+background:#e0e7ff;
+
+color:#4f46e5;
+
+border-radius:20px;
+
+font-size:12px;
+
+margin-bottom:10px;
+
+}
+
+.card h3{
+
+margin-bottom:10px;
+
+}
+
+.card p{
+
+margin-bottom:10px;
+
+color:#666;
+
+}
+
+.book-btn{
+
+width:100%;
+
+padding:12px;
+
+background:#4f46e5;
+
+color:white;
+
+border:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+}
+
+.wishlist{
+
+width:100%;
+
+padding:12px;
+
+margin-top:8px;
+
+background:#ec4899;
+
+color:white;
+
+border:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+}
+
+.stats{
+
+padding:50px 20px;
+
+text-align:center;
+
+background:white;
+
+}
+
+.counter{
+
+font-size:45px;
+
+font-weight:bold;
+
+color:#4f46e5;
+
+}
+
+#history li,
+#wishlist li{
+
+list-style:none;
+
+padding:10px;
+
+margin:10px;
+
+background:#f3f4f6;
+
+border-radius:10px;
+
+}
+
+.dark-mode{
+
+background:#111827;
+color:white;
+
+}
+
+.dark-mode .hero{
+
+background:#1f2937;
+
+}
+
+.dark-mode .card{
+
+background:#1f2937;
+color:white;
+
+}
+
+.dark-mode .feature{
+
+background:#1f2937;
+color:white;
+
+}
+
+footer{
+
+background:#111827;
+
+color:white;
+
+text-align:center;
+
+padding:20px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+🏫 SchoolFest Pro
+</div>
+
+<nav>
+
+<a href="#">Home</a>
+
+<a href="#">Events</a>
+
+<a href="#">Dashboard</a>
+
+<a href="#">Contact</a>
+
+<button
+class="dark-btn"
+onclick="toggleDarkMode()">
+🌙
+</button>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+<h1>
+Discover Amazing School Events
+</h1>
+
+<p>
+Discover and book exciting school events at
+<b>ABC Funhouse</b>, including Science Exhibitions,
+Annual Functions, Sports Day, Quiz Competitions,
+Art & Craft Shows and School Workshops.
+</p>
+
+<div class="login-box">
+
+<input
+type="text"
+id="studentName"
+placeholder="Enter Student Name">
+
+<button
+class="btn"
+onclick="login()">
+
+Login / Register
+
+</button>
+
+</div>
+
+<h3
+id="welcomeUser"
+style="margin-top:20px;">
+</h3>
+
+<div class="features">
+
+<div class="feature">
+🏆 30+ School Events
+</div>
+
+<div class="feature">
+🎟️ QR Tickets
+</div>
+
+<div class="feature">
+📊 Analytics
+</div>
+
+<div class="feature">
+🏫 School Friendly
+</div>
+
+</div>
+
+</section>
+
+<section class="why">
+
+<h2>
+Why Choose SchoolFest Pro?
+</h2>
+
+<p>
+
+✔️ QR Based Tickets
+
+<br><br>
+
+✔️ Event Dashboard
+
+<br><br>
+
+✔️ Live Analytics
+
+<br><br>
+
+✔️ Easy For Students & Teachers
+
+<br><br>
+
+✔️ Parent Teacher Meetings
+
+<br><br>
+
+✔️ School Competition Management
+
+</p>
+
+</section>
+
+<section class="search-section">
+
+<div class="search-box">
+
+<input
+id="searchInput"
+type="text"
+placeholder="Search School Events">
+
+<button
+onclick="searchEvents()">
+Search
+</button>
+
+</div>
+
+</section>
+<section
+class="events"
+id="eventContainer">
+
+<!-- EVENT 1 -->
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800">
+
+<div class="card-content">
+
+<span class="tag">
+Science
+</span>
+
+<h3>
+Science Exhibition 2026
+</h3>
+
+<p>
+📅 10 July 2026
+</p>
+
+<p>
+🕘 Time: 10:00 AM - 1:00 PM
+</p>
+
+<p>
+📍 School Auditorium, ABC Funhouse
+</p>
+<p>
+Seats Left :
+<span id="seat1">
+100
+</span>
+</p>
+
+<button
+class="book-btn"
+onclick="bookEvent('Science Exhibition 2026','seat1')">
+Book Ticket
+</button>
+
+<button
+class="wishlist"
+onclick="addWishlist('Science Exhibition 2026')">
+❤️ Add Wishlist
+</button>
+
+</div>
+
+</div>
+
+<!-- EVENT 2 -->
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=800">
+
+<div class="card-content">
+
+<span class="tag">
+Cultural
+</span>
+
+<h3>
+Annual Function 2026
+</h3>
+
+<p>
+📅 20 July 2026
+</p>
+
+<p>
+🕘 Time: 11:00 AM - 2:00 PM
+</p>
+
+<p>
+📍 Main Stage, ABC Funhouse
+</p>
+<p>
+Seats Left :
+<span id="seat2">
+120
+</span>
+</p>
+
+<button
+class="book-btn"
+onclick="bookEvent('Annual Function 2026','seat2')">
+Book Ticket
+</button>
+
+<button
+class="wishlist"
+onclick="addWishlist('Annual Function 2026')">
+❤️ Add Wishlist
+</button>
+
+</div>
+
+</div>
+
+<!-- EVENT 3 -->
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800">
+
+<div class="card-content">
+
+<span class="tag">
+Workshop
+</span>
+
+<h3>
+Computer Skills Workshop
+</h3>
+
+
+<p>
+Seats Left :
+<span id="seat3">
+80
+</span>
+</p>
+<p>
+📅 25 July 2026
+</p>
+
+<p>
+🕘 Time: 10:30 AM - 12:30 PM
+</p>
+
+<p>
+📍 Computer Lab, ABC Funhouse
+</p>
+<button
+class="book-btn"
+onclick="bookEvent('Computer Skills Workshop','seat3')">
+Book Ticket
+</button>
+
+<button
+class="wishlist"
+onclick="addWishlist('Computer Skills Workshop')">
+❤️ Add Wishlist
+</button>
+
+</div>
+
+</div>
+
+<!-- EVENT 4 -->
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800">
+
+<div class="card-content">
+
+<span class="tag">
+Sports
+</span>
+
+<h3>
+School Sports Day
+</h3>
+
+<p>
+📅 5 August 2026
+</p>
+
+<p>
+🕘 Time: 9:30 AM - 1:30 PM
+</p>
+
+<p>
+📍 School Ground, ABC Funhouse
+</p>
+<p>
+Seats Left :
+<span id="seat4">
+150
+</span>
+</p>
+
+<button
+class="book-btn"
+onclick="bookEvent('School Sports Day','seat4')">
+Book Ticket
+</button>
+
+<button
+class="wishlist"
+onclick="addWishlist('School Sports Day')">
+❤️ Add Wishlist
+</button>
+
+</div>
+
+</div>
+
+<!-- EVENT 5 -->
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800">
+
+<div class="card-content">
+
+<span class="tag">
+Quiz
+</span>
+
+<h3>
+Inter-School Quiz Competition
+</h3>
+
+<p>
+📅 12 August 2026
+</p>
+
+<p>
+🕘 Time: 12:00 PM - 3:00 PM
+</p>
+
+<p>
+📍 Activity Hall, ABC Funhouse
+</p>
+<p>
+Seats Left :
+<span id="seat5">
+90
+</span>
+</p>
+
+<button
+class="book-btn"
+onclick="bookEvent('Inter-School Quiz Competition','seat5')">
+Book Ticket
+</button>
+
+<button
+class="wishlist"
+onclick="addWishlist('Inter-School Quiz Competition')">
+❤️ Add Wishlist
+</button>
+
+</div>
+
+</div>
+
+<!-- EVENT 6 -->
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800">
+
+<div class="card-content">
+
+<span class="tag">
+Art & Craft
+</span>
+
+<h3>
+Art & Craft Exhibition
+</h3>
+
+<p>
+📅 20 August 2026
+</p>
+
+<p>
+🕘 Time: 10:00 AM - 4:00 PM
+</p>
+
+<p>
+📍 Art Room, ABC Funhouse
+</p>
+<p>
+Seats Left :
+<span id="seat6">
+120
+</span>
+</p>
+
+<button
+class="book-btn"
+onclick="bookEvent('Art & Craft Exhibition','seat6')">
+Book Ticket
+</button>
+
+<button
+class="wishlist"
+onclick="addWishlist('Art & Craft Exhibition')">
+❤️ Add Wishlist
+</button>
+
+</div>
+
+</div>
+
+</section>
+<!-- TOTAL BOOKINGS -->
+
+<section class="stats">
+
+<h2>
+Total Bookings
+</h2>
+
+<div
+class="counter"
+id="bookingCount">
+0
+</div>
+
+</section>
+
+<!-- QR TICKET -->
+
+<section class="stats">
+
+<h2>
+🎟️ Your Ticket QR
+</h2>
+
+<div id="qrcode"></div>
+
+</section>
+
+<!-- BOOKING HISTORY -->
+
+<section class="stats">
+
+<h2>
+📜 Booking History
+</h2>
+
+<ul id="history"></ul>
+
+</section>
+
+<!-- WISHLIST -->
+
+<section class="stats">
+
+<h2>
+❤️ Wishlist
+</h2>
+
+<ul id="wishlist"></ul>
+
+</section>
+
+<!-- ADMIN DASHBOARD -->
+
+<section class="stats">
+
+<h2>
+📊 Admin Dashboard
+</h2>
+
+<div
+style="
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+">
+
+<div class="feature">
+<h3 id="totalEvents">
+6
+</h3>
+<p>Total Events</p>
+</div>
+
+<div class="feature">
+<h3 id="totalBookings">
+0
+</h3>
+<p>Total Bookings</p>
+</div>
+
+<div class="feature">
+<h3>
+540
+</h3>
+<p>Total Students</p>
+</div>
+
+<div class="feature">
+<h3>
+12
+</h3>
+<p>Upcoming Events</p>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+
+©️ 2026 SchoolFest Pro
+
+<br><br>
+
+School Event Discovery &
+Booking Platform
+
+</p>
+
+</footer>
+
+<script>
+
+let bookings = 0;
+
+let wishlistItems = [];
+
+function login(){
+
+let name =
+document
+.getElementById("studentName")
+.value;
+
+if(name==""){
+
+alert(
+"Please Enter Student Name"
+);
+
+return;
+
+}
+
+document
+.getElementById("welcomeUser")
+.innerHTML =
+
+"Welcome, " +
+name +
+" 👋";
+
+}
+
+function bookEvent(
+eventName,
+seatId
+){
+
+bookings++;
+
+document
+.getElementById(
+"bookingCount"
+)
+.innerText =
+bookings;
+
+document
+.getElementById(
+"totalBookings"
+)
+.innerText =
+bookings;
+
+let seat =
+document
+.getElementById(
+seatId
+);
+
+let remaining =
+parseInt(
+seat.innerText
+);
+
+if(remaining>0){
+
+seat.innerText =
+remaining - 1;
+
+}
+
+let ticketId =
+
+"SFP" +
+
+Math.floor(
+Math.random()*100000
+);
+
+document
+.getElementById(
+"history"
+)
+.innerHTML +=
+
+"<li>🎟️ " +
+
+eventName +
+
+" | Ticket ID : " +
+
+ticketId +
+
+"</li>";
+
+document
+.getElementById(
+"qrcode"
+)
+.innerHTML="";
+
+new QRCode(
+
+document
+.getElementById(
+"qrcode"
+),
+
+{
+
+text:
+
+eventName +
+
+" | " +
+
+ticketId,
+
+width:180,
+
+height:180
+
+}
+
+);
+
+alert(
+
+"Booking Successful!\n\nTicket ID : "
+
++ ticketId
+
+);
+
+}
+
+function addWishlist(
+eventName
+){
+
+wishlistItems.push(
+eventName
+);
+
+document
+.getElementById(
+"wishlist"
+)
+.innerHTML +=
+
+"<li>❤️ " +
+
+eventName +
+
+"</li>";
+
+}
+
+function toggleDarkMode(){
+
+document.body
+.classList.toggle(
+"dark-mode"
+);
+
+}
+
+function searchEvents(){
+
+let input =
+
+document
+.getElementById(
+"searchInput"
+)
+.value
+.toLowerCase();
+
+let cards =
+
+document
+.querySelectorAll(
+".card"
+);
+
+cards.forEach(card=>{
+
+let title =
+
+card
+.querySelector("h3")
+.innerText
+.toLowerCase();
+
+if(
+title.includes(input)
+){
+
+card.style.display =
+"block";
+
+}
+
+else{
+
+card.style.display =
+"none";
+
+}
+
+});
+
+}
+
+</script>
+
+</body>
+
+</html>
